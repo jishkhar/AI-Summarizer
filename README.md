@@ -1,207 +1,291 @@
-# AI Summarizer
+# AI Summary for Articles - Chrome Extension
 
+[![Chrome Extension](https://img.shields.io/badge/Chrome-Extension-4285f4.svg)](https://developer.chrome.com/docs/extensions/)
+[![Manifest V3](https://img.shields.io/badge/Manifest-V3-green.svg)](https://developer.chrome.com/docs/extensions/mv3/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![React](https://img.shields.io/badge/React-18.x-blue.svg)](https://reactjs.org/)
-[![Vite](https://img.shields.io/badge/Vite-4.x-purple.svg)](https://vitejs.dev/)
 
-A powerful AI-powered text summarization web application that harnesses advanced natural language processing to generate concise, accurate summaries from lengthy articles and documents.
+A powerful Chrome extension that generates AI-powered summaries of web articles using Google's Gemini API. Simply browse to any article and get instant, intelligent summaries with customizable detail levels.
 
-![AI Summarizer Demo](./demo/screenshot.png)
+![AI Summary Extension Demo](./demo/screenshot.png)
 
 ## 🚀 Features
 
-- **Smart URL Summarization**: Paste any article URL and get instant AI-generated summaries
-- **Multiple Summary Lengths**: Choose between short, medium, or detailed summaries
-- **History Management**: Keep track of your previously summarized articles
+- **One-click Article Summarization**: Automatically extracts and summarizes content from any web page
+- **Multiple Summary Types**: Choose between brief, detailed, or bullet-point summaries
+- **Smart Content Detection**: Intelligently identifies article content using multiple selectors
+- **Gemini AI Integration**: Powered by Google's advanced Gemini 1.5 Flash model
+- **Secure API Key Storage**: Your API key is stored locally and never shared
 - **Copy to Clipboard**: Easily copy summaries for sharing or saving
-- **Responsive Design**: Works seamlessly across desktop, tablet, and mobile devices
-- **Real-time Processing**: Fast API responses with loading indicators
-- **Clean UI**: Modern, intuitive interface built with Tailwind CSS
+- **Clean, Modern UI**: Intuitive popup interface with loading states
+- **Universal Compatibility**: Works on all websites with readable content
 
-## 🛠️ Tech Stack
+## 🛠️ Technology Stack
 
-- **Frontend**: React 18 with Vite
-- **Styling**: Tailwind CSS
-- **State Management**: Redux Toolkit
-- **API Integration**: RapidAPI Article Extractor & Summarizer
-- **Icons**: Heroicons/Lucide React
-- **Build Tool**: Vite
-- **Package Manager**: npm/yarn
+- **Extension Framework**: Chrome Manifest V3
+- **AI Model**: Google Gemini 1.5 Flash API
+- **Storage**: Chrome Storage API (sync)
+- **Content Detection**: Advanced DOM parsing
+- **UI**: Vanilla HTML/CSS/JavaScript
+- **Permissions**: Active tab, storage, scripting, all URLs
 
 ## 📋 Prerequisites
 
-Before running this project, make sure you have the following installed:
+- Google Chrome browser (latest version recommended)
+- Google account for Gemini API access
+- Active internet connection
 
-- Node.js (v16.0 or higher)
-- npm or yarn
-- A RapidAPI account and API key
+## ⚡ Installation & Setup
 
-## ⚡ Quick Start
-
-### 1. Clone the repository
+### 1. Download the Extension
 
 ```bash
 git clone https://github.com/jishkhar/AI-Summarizer.git
 cd AI-Summarizer
 ```
 
-### 2. Install dependencies
+### 2. Get Your Gemini API Key
 
-```bash
-npm install
-# or
-yarn install
-```
+1. Visit [Google AI Studio](https://makersuite.google.com/app/apikey)
+2. Sign in with your Google account
+3. Click **"Create API Key"**
+4. Copy the generated API key (starts with `AIza...`)
 
-### 3. Environment Setup
+### 3. Install the Extension
 
-Create a `.env` file in the root directory and add your API key:
+1. Open Chrome and navigate to `chrome://extensions/`
+2. Enable **"Developer mode"** (toggle in top right)
+3. Click **"Load unpacked"**
+4. Select the downloaded `AI-Summarizer` folder
+5. The extension will appear in your extensions list
 
-```env
-VITE_RAPIDAPI_ARTICLE_KEY=your_rapidapi_key_here
-```
+### 4. Configure API Key
 
-To get your API key:
-1. Sign up at [RapidAPI](https://rapidapi.com/)
-2. Subscribe to the Article Extractor and Summarizer API
-3. Copy your API key from the dashboard
+1. Click the extension icon in your Chrome toolbar
+2. Click **"Settings"** button
+3. Paste your Gemini API key
+4. Click **"Test API Key"** to verify it works
+5. Click **"Save Settings"**
 
-### 4. Run the development server
+## 🎯 How to Use
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+### Basic Usage
+1. **Navigate** to any article or webpage with text content
+2. **Click** the AI Summary extension icon in your toolbar
+3. **Select** your preferred summary type:
+   - **Brief Summary**: 2-3 sentence overview
+   - **Detailed Summary**: Comprehensive analysis
+   - **Key Points**: Bullet-point format
+4. **Click "Summarize"** and wait for the AI to process
+5. **Copy** the summary using the copy button
 
-Open [http://localhost:3000](http://localhost:3000) to view the application in your browser.
-
-## 🔧 Available Scripts
-
-- `npm run dev` - Start development server
-- `npm run build` - Build for production
-- `npm run preview` - Preview production build
-- `npm run lint` - Run ESLint
-- `npm run lint:fix` - Fix ESLint errors
+### Advanced Features
+- **Smart Content Detection**: The extension automatically finds article content using multiple detection methods
+- **Error Handling**: Clear error messages if content can't be extracted or API issues occur
+- **Responsive Design**: Works seamlessly across different screen sizes
 
 ## 📁 Project Structure
 
 ```
 AI-Summarizer/
-├── public/
-│   ├── favicon.ico
-│   └── index.html
-├── src/
-│   ├── components/
-│   │   ├── Demo.jsx
-│   │   ├── Hero.jsx
-│   │   └── index.js
-│   ├── services/
-│   │   ├── article.js
-│   │   └── store.js
-│   ├── assets/
-│   │   └── images/
-│   ├── App.jsx
-│   ├── App.css
-│   ├── index.css
-│   └── main.jsx
-├── .env
-├── .gitignore
-├── package.json
-├── tailwind.config.js
-├── vite.config.js
-└── README.md
+├── manifest.json          # Extension configuration
+├── background.js          # Service worker for extension lifecycle
+├── content.js            # Content script for text extraction
+├── popup.html            # Main extension popup interface
+├── popup.js              # Popup functionality and API calls
+├── options.html          # Settings page
+├── options.js            # Settings functionality
+└── README.md             # This file
 ```
 
-## 🎯 How to Use
+## 🔧 Key Files Explained
 
-1. **Enter Article URL**: Paste the URL of any article you want to summarize
-2. **Click Summarize**: Hit the summarize button to process the article
-3. **Read Summary**: View the AI-generated summary in clean, readable format
-4. **Copy or Save**: Use the copy button to save the summary to clipboard
-5. **Browse History**: Access your previously summarized articles from the history section
+### `manifest.json`
+- Defines extension permissions and structure
+- Configures content scripts and service worker
+- Specifies popup and options pages
 
-## 🔗 API Integration
+### `content.js`
+- Extracts readable content from web pages
+- Uses multiple selectors to find article text
+- Handles various website layouts automatically
 
-This project uses the Article Extractor and Summarizer API from RapidAPI. The API provides:
+### `popup.js`
+- Main extension logic and UI interactions
+- Integrates with Gemini API for summarization
+- Manages different summary types and error handling
 
-- Article content extraction from URLs
-- AI-powered text summarization
-- Multiple summary length options
-- Fast response times
-- Reliable uptime
+### `options.js`
+- API key configuration and validation
+- Secure storage management
+- API connection testing functionality
+
+## 🔐 Privacy & Security
+
+- **Local Storage Only**: Your API key is stored locally in Chrome's sync storage
+- **No Data Collection**: No user data is collected or transmitted to external servers
+- **Secure API Calls**: Direct communication with Google's Gemini API only
+- **No Third-party Tracking**: Extension operates independently without external dependencies
 
 ## 🎨 Customization
 
-### Styling
-The project uses Tailwind CSS for styling. You can customize the appearance by:
-- Modifying `tailwind.config.js`
-- Updating component styles in respective JSX files
-- Adding custom CSS in `App.css` or `index.css`
+### Modifying Summary Types
+Edit the prompt templates in `popup.js`:
 
-### API Configuration
-To use a different summarization API:
-1. Update the API endpoints in `src/services/article.js`
-2. Modify the request/response handling logic
-3. Update environment variables accordingly
+```javascript
+// Brief summary prompt
+prompt = `Please provide a brief, concise summary of this article in 2-3 sentences...`;
 
-## 🚀 Deployment
+// Detailed summary prompt  
+prompt = `Please provide a comprehensive summary of this article...`;
 
-### Deploy to Vercel
+// Bullet points prompt
+prompt = `Please summarize this article as 5-7 key bullet points...`;
+```
 
-1. Push your code to GitHub
-2. Connect your repository to Vercel
-3. Add environment variables in Vercel dashboard
-4. Deploy with automatic builds
+### Styling the Interface
+- Modify `popup.html` styles for UI customization
+- Update `options.html` for settings page styling
+- All styles are inline for extension compatibility
 
-### Deploy to Netlify
+### Content Detection
+Enhance content extraction in `content.js` by adding new selectors:
 
-1. Build the project: `npm run build`
-2. Upload the `dist` folder to Netlify
-3. Configure environment variables
-4. Set up continuous deployment
+```javascript
+const selectors = [
+  'article',
+  '[role="main"]',
+  '.your-custom-selector', // Add your selectors here
+  // ... existing selectors
+];
+```
+
+## 🔧 Development
+
+### Testing Locally
+1. Make your changes to the code
+2. Go to `chrome://extensions/`
+3. Click the refresh icon on your extension
+4. Test the updated functionality
+
+### Debugging
+- Use Chrome DevTools for popup debugging
+- Check `chrome://extensions/` for error logs
+- Use `console.log()` statements for troubleshooting
+
+## 📦 Distribution
+
+### Chrome Web Store Preparation
+1. Create extension screenshots and promotional images
+2. Write store description and metadata
+3. Package extension as ZIP file
+4. Submit for review following [Chrome Web Store guidelines](https://developer.chrome.com/docs/webstore/)
+
+### Manual Distribution
+1. Package the extension folder as a ZIP file
+2. Share with users for local installation
+3. Provide setup instructions for API key configuration
+
+## 🐛 Troubleshooting
+
+### Common Issues
+
+**"API key not found" error:**
+- Ensure you've configured your Gemini API key in settings
+- Verify the API key starts with "AIza"
+- Test the API key using the built-in test function
+
+**"Could not extract readable content" error:**
+- Try refreshing the page and summarizing again
+- Some websites may block content extraction
+- Ensure the page has sufficient text content
+
+**Extension not appearing:**
+- Check that Developer mode is enabled in Chrome
+- Verify all files are in the correct directory structure
+- Look for errors in `chrome://extensions/`
+
+**API rate limiting:**
+- Gemini API has usage limits for free tier
+- Wait a few minutes before trying again
+- Consider upgrading to a paid plan for higher limits
 
 ## 🤝 Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request. For major changes, please open an issue first to discuss what you would like to change.
+Contributions are welcome! Here's how to get started:
 
-1. Fork the project
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+1. **Fork** the repository
+2. **Create** a feature branch (`git checkout -b feature/amazing-feature`)
+3. **Make** your changes
+4. **Test** thoroughly with the extension
+5. **Commit** your changes (`git commit -m 'Add amazing feature'`)
+6. **Push** to the branch (`git push origin feature/amazing-feature`)
+7. **Open** a Pull Request
 
-## 📝 License
+### Development Guidelines
+- Follow Chrome Extension best practices
+- Test on multiple websites and content types
+- Ensure compatibility with Manifest V3
+- Maintain clean, readable code with comments
+
+## 📝 API Information
+
+### Gemini API Details
+- **Model**: gemini-1.5-flash
+- **Endpoint**: `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent`
+- **Max Input**: ~15,000 characters (automatically truncated)
+- **Max Output**: 1,000 tokens
+- **Rate Limits**: Varies by API tier
+
+### API Configuration
+```javascript
+generationConfig: {
+  temperature: 0.3,      // Lower temperature for more focused summaries
+  maxOutputTokens: 1000  // Limit response length
+}
+```
+
+## 🆘 Support
+
+If you encounter issues or have questions:
+
+1. **Check** the troubleshooting section above
+2. **Search** existing GitHub issues
+3. **Create** a new issue with:
+   - Chrome version
+   - Extension version
+   - Steps to reproduce the problem
+   - Error messages (if any)
+
+## 🚀 Future Enhancements
+
+- [ ] Support for PDF document summarization
+- [ ] Multiple language support for summaries
+- [ ] Custom prompt templates
+- [ ] Summary history and favorites
+- [ ] Export summaries to various formats
+- [ ] Dark theme option
+- [ ] Keyboard shortcuts
+- [ ] Integration with note-taking apps
+- [ ] Batch processing for multiple articles
+- [ ] Summary quality rating system
+
+## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## 🙏 Acknowledgments
 
-- [OpenAI](https://openai.com/) for inspiration in AI text processing
-- [RapidAPI](https://rapidapi.com/) for providing the summarization API
-- [Tailwind CSS](https://tailwindcss.com/) for the utility-first CSS framework
-- [React](https://reactjs.org/) team for the amazing framework
-- [Vite](https://vitejs.dev/) for the lightning-fast build tool
+- **Google Gemini AI** - For providing the powerful summarization API
+- **Chrome Extensions Team** - For the robust extension platform
+- **Open Source Community** - For inspiration and best practices
 
-## 📞 Support
+## 📞 Contact
 
-If you have any questions or run into issues, please:
-- Open an issue on GitHub
-- Check existing issues for solutions
-- Contact: [your-email@example.com]
-
-## 🔮 Future Enhancements
-
-- [ ] Support for PDF document summarization
-- [ ] Multiple language support
-- [ ] User authentication and personal dashboards
-- [ ] Summary comparison features
-- [ ] Export summaries to various formats (PDF, Word, etc.)
-- [ ] Dark/Light theme toggle
-- [ ] Advanced summary customization options
+- **GitHub**: [@jishkhar](https://github.com/jishkhar)
+- **Issues**: [GitHub Issues](https://github.com/jishkhar/AI-Summarizer/issues)
 
 ---
 
-⭐ If you found this project helpful, please consider giving it a star on GitHub!
+⭐ **If this extension helped you save time reading articles, please consider giving it a star on GitHub!**
 
-**Built with ❤️ by [jishkhar](https://github.com/jishkhar)**
+**Built with ❤️ by [jishkhar](https://github.com/jishkhar) | Powered by Google Gemini AI**
