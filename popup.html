@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>AI Summary</title>
+    <style>
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        width: 400px;
+        min-height: 300px;
+        padding: 16px;
+        margin: 0;
+        background: #f8f9fa;
+      }
+
+      .header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 16px;
+        padding-bottom: 12px;
+        border-bottom: 1px solid #e9ecef;
+      }
+
+      h2 {
+        color: #333;
+        margin: 0;
+        font-size: 18px;
+        font-weight: 600;
+      }
+
+      .controls {
+        display: flex;
+        gap: 8px;
+        margin-bottom: 16px;
+        align-items: center;
+      }
+
+      select {
+        flex: 1;
+        padding: 8px 12px;
+        border: 1px solid #dee2e6;
+        border-radius: 6px;
+        background: white;
+        font-size: 14px;
+      }
+
+      button {
+        padding: 8px 16px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 500;
+        transition: all 0.2s;
+      }
+
+      .primary-btn {
+        background: #4285f4;
+        color: white;
+      }
+
+      .primary-btn:hover {
+        background: #3367d6;
+      }
+
+      .primary-btn:disabled {
+        background: #ccc;
+        cursor: not-allowed;
+      }
+
+      .secondary-btn {
+        background: #34a853;
+        color: white;
+      }
+
+      .secondary-btn:hover {
+        background: #2d8a47;
+      }
+
+      .settings-btn {
+        background: transparent;
+        color: #666;
+        border: 1px solid #dee2e6;
+        padding: 6px 12px;
+        font-size: 12px;
+      }
+
+      .settings-btn:hover {
+        background: #f8f9fa;
+      }
+
+      #result {
+        background: white;
+        border: 1px solid #dee2e6;
+        border-radius: 8px;
+        padding: 16px;
+        min-height: 150px;
+        max-height: 300px;
+        overflow-y: auto;
+        font-size: 14px;
+        line-height: 1.5;
+        white-space: pre-wrap;
+      }
+
+      .placeholder {
+        color: #6c757d;
+        font-style: italic;
+        text-align: center;
+        padding: 40px 20px;
+      }
+
+      .loading {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 150px;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .spinner {
+        border: 3px solid #f3f3f3;
+        border-top: 3px solid #4285f4;
+        border-radius: 50%;
+        width: 24px;
+        height: 24px;
+        animation: spin 1s linear infinite;
+      }
+
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+
+      .error {
+        color: #dc3545;
+        background: #f8d7da;
+        border: 1px solid #f5c6cb;
+        border-radius: 6px;
+        padding: 12px;
+        margin: 8px 0;
+      }
+
+      .success-message {
+        color: #28a745;
+        font-size: 12px;
+        margin-top: 4px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <h2>AI Summary</h2>
+      <div style="margin-left: auto;">
+        <button id="settings-btn" class="settings-btn">Settings</button>
+      </div>
+    </div>
+
+    <div class="controls">
+      <select id="summary-type">
+        <option value="brief">Brief Summary</option>
+        <option value="detailed">Detailed Summary</option>
+        <option value="bullets">Key Points</option>
+      </select>
+      <button id="summarize" class="primary-btn">Summarize</button>
+    </div>
+
+    <div style="margin-bottom: 12px;">
+      <button id="copy-btn" class="secondary-btn" style="width: 100%;">Copy Summary</button>
+      <div id="copy-success" class="success-message" style="display: none;">Copied to clipboard!</div>
+    </div>
+
+    <div id="result">
+      <div class="placeholder">
+        Select a summary type and click 'Summarize' to generate an AI summary of this page.
+      </div>
+    </div>
+
+    <script src="popup.js"></script>
+  </body>
+</html>
